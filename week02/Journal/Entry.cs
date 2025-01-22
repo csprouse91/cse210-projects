@@ -11,6 +11,6 @@ public class Entry
     //Display the journal entry with a formatted string
     public void Display()
     {
-        Console.WriteLine($"{_date}\nPrompt: {_promptText}\n{_entryText}\n");
+        Console.WriteLine($"Date: {_date} | Prompt: {_promptText} | \n{_entryText}\n");
     }
 }

@@ -6,14 +6,16 @@ class Program
 {
     static void Main(string[] args)
     {
-
+        Console.WriteLine("Welcome to the Journal App!");
+        //Create a Journal 
+        Journal journal = new Journal();
         //Declare input to initialize the while loop
         int input = 0;
         //While loop to run until the user inputs 5
         while (input != 5)
         {
+
             //Display the main menu
-            Console.WriteLine("Welcome to the Journal App!");
             Console.WriteLine("Select an option:");
             Console.WriteLine("1. New Entry");
             Console.WriteLine("2. View Journal");
@@ -36,11 +38,50 @@ class Program
                 {
                     newPromptGenerator._prompts.Add(line);
                 }
-                Console.WriteLine("Prompts loaded from promptsFile");
+                // Console.WriteLine("Prompts loaded from promptsFile"); Commented out after verified
                 //Display a random entry prompt
                 newEntry._promptText = newPromptGenerator.GetRandomPrompt();
                 Console.WriteLine(newEntry._promptText);
+                //Get the user's entry text
+                Console.Write("Begin your entry(Enter will submit the entry - 0 and enter will change the prompt):\n> ");
+                //Exceeding Requirements            Create a loop to allow the user to change the prompt 
+                string newPrompt = Console.ReadLine();
+                while (newPrompt == "0")
+                {
+                    newEntry._promptText = newPromptGenerator.GetRandomPrompt();
+                    Console.WriteLine(newEntry._promptText);
+                    //Get the user's entry text
+                    Console.Write("Begin your entry(Enter will submit the entry - Enter 0 to change the prompt):\n> ");
+                    newPrompt = Console.ReadLine();
+                }
+                newEntry._entryText = newPrompt;
+                //Add the entry to the journal
+                journal.AddEntry(newEntry);
+                Console.WriteLine("Entry saved!");
+                journal.DisplayAll();
+            }
 
+
+            //If the user inputs 2
+            else if (input == 2)
+            {
+                //Display all entries
+                journal.DisplayAll();
+
+            }
+
+            //If the user inputs 3
+            else if (input == 3)
+            {
+                //Save journal to a file
+                string fileName = "userJournal.txt";
+                journal.SaveToFile(fileName);
+            }
+            else if (input == 4)
+            {
+                //Load journal from file
+                string fileName = "userJournal.txt";
+                journal.LoadFromFile(fileName);
             }
             else if (input == 5)
             {
