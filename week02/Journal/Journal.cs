@@ -3,20 +3,20 @@ public class Journal
     //Member variables
     public List<Entry> _entries = new List<Entry>();
 
-    //Method to add a new entry to the journal
+    //Methods
     public void AddEntry(Entry newEntry)
     {
-
+        _entries.Add(newEntry);
     }
     public void DisplayAll()
     {
 
     }
-    public void SaveToFile(string filename)
+    public void SaveToFile(string fileName)
     {
 
     }
-    public void LoadFromFile(string filename)
+    public void LoadFromFile(string fileName)
     {
 
     }

@@ -6,7 +6,10 @@ public class PromptGenerator
     //Method to get a random prompt
     public string GetRandomPrompt()
     {
-        return "";
+        //Create a random index
+        int randomIndex = new Random().Next(0, _prompts.Count);
+        //Return the prompt at the random index
+        return _prompts[randomIndex];
     }
 
 }

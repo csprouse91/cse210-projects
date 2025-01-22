@@ -4,13 +4,13 @@ using System.Net.NetworkInformation;
 public class Entry
 {
     //Member variables
-    public string _date;
+    public string _date = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
     public string _promptText;
     public string _entryText;
 
     //Display the journal entry with a formatted string
     public void Display()
     {
-
+        Console.WriteLine($"{_date}\nPrompt: {_promptText}\n{_entryText}\n");
     }
 }
