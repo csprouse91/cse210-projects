@@ -1,3 +1,4 @@
+
 public class Journal
 {
     //Member variables
@@ -27,18 +28,18 @@ public class Journal
     }
     public void LoadFromFile(string fileName)
     {
+        _entries.Clear();
         string[] lines = File.ReadAllLines(fileName);
-        Journal journal = new Journal();
-        Entry newEntry = new Entry();
-
         foreach (string line in lines)
         {
-            string[] parts = line.Split('|');
-
+            //I CAN'T BELIEVE THE SINGLE QUOTES WERE THE PROBLEM
+            string[] parts = line.Split("|");
+            Entry newEntry = new Entry();
             newEntry._date = parts[0];
             newEntry._promptText = parts[1];
             newEntry._entryText = parts[2];
-            journal.AddEntry(newEntry);
+            _entries.Add(newEntry);
         }
+
     }
 }

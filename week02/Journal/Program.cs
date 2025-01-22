@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+//Added a loop to allow user to change the prompt
+//Added a prompts file to load prompts from
 
 class Program
 {
@@ -58,7 +60,6 @@ class Program
                 //Add the entry to the journal
                 journal.AddEntry(newEntry);
                 Console.WriteLine("Entry saved!");
-                journal.DisplayAll();
             }
 
 
@@ -79,6 +80,8 @@ class Program
             }
             else if (input == 4)
             {
+                Console.WriteLine("Reading from file...");
+
                 //Load journal from file
                 string fileName = "userJournal.txt";
                 journal.LoadFromFile(fileName);
