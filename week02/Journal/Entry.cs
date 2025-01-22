@@ -4,7 +4,7 @@ using System.Net.NetworkInformation;
 public class Entry
 {
     //Member variables
-    public string _date = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+    public string _date = DateTime.Now.ToString("yyyy-MM-dd");
     public string _promptText;
     public string _entryText;
 
