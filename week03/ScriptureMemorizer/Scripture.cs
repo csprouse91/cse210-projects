@@ -20,4 +20,47 @@ public class Scripture
         }
     }
 
+    //Method to display text "{reference} {text}"
+    public string DisplayText()
+    {
+        string text = _reference.GetDisplayText() + " ";
+        foreach (Word word in _words)
+        {
+            text += word + " ";
+        }
+        return text;
+    }
+
+    //Method to hide words
+    public void HideWords(int wordsToHide)
+    {
+        _wordsToHide = wordsToHide;
+        //Randomly select words to hide
+        for (int i = 0; i < _wordsToHide; i++)
+        {
+            int randomIndex = new Random().Next(0, _words.Count);
+            //Call the Hide method on the Word object at the random index
+            _words[randomIndex].Hide();
+        }
+    }
+
+    //Method to check if all words are hidden
+    public bool AllWordsHidden()
+    {
+        bool _allWordsHidden = false;
+        //loop through each word in List<Word> _words and return true if all words are hidden
+        foreach (Word word in _words)
+        {
+            if (word.IsHidden())
+            {
+                _allWordsHidden = true;
+            }
+            else
+            {
+                _allWordsHidden = false;
+            }
+        }
+        return _allWordsHidden;
+
+    }
 }
