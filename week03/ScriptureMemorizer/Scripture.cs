@@ -1,11 +1,15 @@
 //Scripture Class will handle displaying the text to the user, and hiding words based on the number of words to be hidden given by the user. 
 //
+using System.Runtime.CompilerServices;
+
 public class Scripture
 {
     //Member variables (made private)
     private Reference _reference;
     private List<Word> _words = new List<Word>();
+    private List<Word> _hiddenWords = new List<Word>();
     private int _wordsToHide;
+    private bool _allWordsHidden = false;
 
     //Constructor
     public Scripture(Reference reference, string text)
@@ -26,7 +30,7 @@ public class Scripture
         string text = _reference.GetDisplayText() + " ";
         foreach (Word word in _words)
         {
-            text += word + " ";
+            text += word.GetDisplayText() + " ";
         }
         return text;
     }
@@ -47,20 +51,23 @@ public class Scripture
     //Method to check if all words are hidden
     public bool AllWordsHidden()
     {
-        bool _allWordsHidden = false;
         //loop through each word in List<Word> _words and return true if all words are hidden
         foreach (Word word in _words)
         {
-            if (word.IsHidden())
+            if (word.IsHidden() == false)
             {
-                _allWordsHidden = true;
+                _allWordsHidden = false;
+                //break if any word is not hidden
+                break;
             }
             else
             {
-                _allWordsHidden = false;
+                _allWordsHidden = true;
             }
         }
         return _allWordsHidden;
 
     }
+
 }
+
