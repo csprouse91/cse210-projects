@@ -7,11 +7,10 @@ public class Scripture
     //Member variables (made private)
     private Reference _reference;
     private List<Word> _words = new List<Word>();
-    private List<Word> _hiddenWords = new List<Word>();
     private int _wordsToHide;
     private bool _allWordsHidden = false;
 
-    //Constructor
+    //Constructor to create a new Scripture object and SET the reference and text
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
@@ -43,8 +42,12 @@ public class Scripture
         for (int i = 0; i < _wordsToHide; i++)
         {
             int randomIndex = new Random().Next(0, _words.Count);
-            //Call the Hide method on the Word object at the random index
-            _words[randomIndex].Hide();
+            if (_words[randomIndex].IsHidden() == false)
+            {
+                //Call the Hide method on the Word object at the random index
+                _words[randomIndex].Hide();
+                
+            }
         }
     }
 

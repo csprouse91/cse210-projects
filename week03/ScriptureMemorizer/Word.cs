@@ -14,7 +14,7 @@ public class Word
     //Method to GET the display text
     public string GetDisplayText()
     {
-        //loop through each char in word and replace with '_' 
+        //loop through each char in word with _isHidden value of true and replace with '_' 
         if (_isHidden)
         {
             for (int i = 0; i < _text.Length; i++)
@@ -28,6 +28,7 @@ public class Word
     //Method to SET the word to hidden
     public void Hide()
     {
+        
         _isHidden = true;
     }
     //Method to SET the word to show
@@ -38,7 +39,14 @@ public class Word
     //Method to check if the word is hidden
     public bool IsHidden()
     {
-        return _isHidden;
+        if (_isHidden)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
