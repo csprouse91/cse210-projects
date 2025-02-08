@@ -16,6 +16,7 @@ class Program
         //Clear the console screen and display the scripture reference and text
         do
         {
+            //Display the scripture reference and text with hidden words (same length as original word with underscores)
             Console.WriteLine(scripture1.DisplayText());
             //Prompt user to press enter or type quit
             Console.WriteLine("Press enter to hide a word, or a number and enter to hide that number of words, or 'quit' to exit the program.");
@@ -23,6 +24,7 @@ class Program
             //If user types quit, exit the program
             if (userInput.ToLower() == "quit")
             {
+                Console.WriteLine("Exiting program...");
                 return;
             }
             //If user presses enter, hide a random word
@@ -45,12 +47,10 @@ class Program
                 }
         } while (scripture1.AllWordsHidden() == false);
 
-
-        //If user types a number and presses enter, hide that number of words
-        //Clear the console and display the scripture reference and text with hidden words (same length as original word with underscores)
-
+        Console.WriteLine(scripture1.DisplayText());//Display the scripture text with all words hidden
         //When all words are hidden, end the program
-
+        Console.WriteLine("All words are hidden. Exiting program...");
+        return;
 
     }
 }

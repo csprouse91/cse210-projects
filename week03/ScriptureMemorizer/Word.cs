@@ -27,8 +27,7 @@ public class Word
     }
     //Method to SET the word to hidden
     public void Hide()
-    {
-        
+    {   
         _isHidden = true;
     }
     //Method to SET the word to show

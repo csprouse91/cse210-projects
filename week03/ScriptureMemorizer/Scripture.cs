@@ -1,12 +1,14 @@
 //Scripture Class will handle displaying the text to the user, and hiding words based on the number of words to be hidden given by the user. 
 //
 using System.Runtime.CompilerServices;
+using System.Xml;
 
 public class Scripture
 {
     //Member variables (made private)
     private Reference _reference;
     private List<Word> _words = new List<Word>();
+    // private List<Word> _hiddenWords = new List<Word>();
     private int _wordsToHide;
     private bool _allWordsHidden = false;
 
@@ -42,11 +44,24 @@ public class Scripture
         for (int i = 0; i < _wordsToHide; i++)
         {
             int randomIndex = new Random().Next(0, _words.Count);
-            if (_words[randomIndex].IsHidden() == false)
+            //If the word is already hidden, select another word
+            if (_words[randomIndex].IsHidden())
+            {
+                i--;
+            }
+            else
             {
                 //Call the Hide method on the Word object at the random index
                 _words[randomIndex].Hide();
-                
+                //Iterate through each word in List<Word> _words and hide the words that match the random index
+                foreach (Word word in _words)
+                {
+                    if (_words[randomIndex] == word)
+                    {
+                        word.Hide();
+                    }
+                }
+
             }
         }
     }
