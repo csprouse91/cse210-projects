@@ -5,6 +5,7 @@ using System.Collections.Generic;
 //Added Console.WriteLine to display the hidden word to verify that all words matching the random index are hidden(the same word)
 //Try and catch block to handle non-integer input
 //Added if else statement to handle randomIndex if the word is already hidden. If the word is already hidden, select another word
+//Added code to compare the hidden word with each word in List<Word> _words and hide all words that match
 
 //Clear console screen before calling methods to show hidden words for verification
 //Clear console screen after  calling methods to match the example video
