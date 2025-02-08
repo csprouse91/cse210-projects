@@ -1,6 +1,13 @@
 using System;
 using System.Collections.Generic;
-//Added 
+
+//===============================Exceed Requirements===============================
+//Added Console.WriteLine to display the hidden word to verify that all words matching the random index are hidden(the same word)
+//Try and catch block to handle non-integer input
+//Added if else statement to handle randomIndex if the word is already hidden. If the word is already hidden, select another word
+
+//Clear console screen before calling methods to show hidden words for verification
+//Clear console screen after  calling methods to match the example video
 
 class Program
 {
@@ -20,6 +27,7 @@ class Program
             Console.WriteLine(scripture1.DisplayText());
             //Prompt user to press enter or type quit
             Console.WriteLine("Press enter to hide a word, or a number and enter to hide that number of words, or 'quit' to exit the program.");
+            //Display hidden words
             string userInput = Console.ReadLine();
             //If user types quit, exit the program
             if (userInput.ToLower() == "quit")
@@ -30,15 +38,17 @@ class Program
             //If user presses enter, hide a random word
             else if (userInput == "")
             {
-                scripture1.HideWords(1);
                 Console.Clear();
+
+                scripture1.HideWords(1);
             }
             //If user types a number and presses enter, hide that number of words
             else try
                 {
+                    Console.Clear();
+
                     int wordsToHide = int.Parse(userInput);
                     scripture1.HideWords(wordsToHide);
-                    Console.Clear();
                 }
                 catch (FormatException)//If the user types a non-integer, display this error message
                 {

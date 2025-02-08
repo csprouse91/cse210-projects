@@ -51,14 +51,16 @@ public class Scripture
             }
             else
             {
+                string hiddenWord = _words[randomIndex].GetDisplayText();
                 //Call the Hide method on the Word object at the random index
-                _words[randomIndex].Hide();
                 //Iterate through each word in List<Word> _words and hide the words that match the random index
                 foreach (Word word in _words)
                 {
-                    if (_words[randomIndex] == word)
+                    if (hiddenWord == word.GetDisplayText())
                     {
                         word.Hide();
+                        Console.WriteLine("Hidden word: ");
+                        Console.WriteLine(hiddenWord);
                     }
                 }
 
