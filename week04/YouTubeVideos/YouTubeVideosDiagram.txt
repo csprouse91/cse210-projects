@@ -1,0 +1,33 @@
+YouTube Video Program
+
+class Video
+
+//Tracks title, author, length(in seconds)//
+//Responsible for storing a list of comments for each video//
+
+//Member variable : data type//
+_title: string
+_author: string
+_length: int or float?
+_comments: List<Comment>
+
+GetAmountOfComments(): int
+GetVideoDisplayText(): string
+
+class Comment
+
+//Tracks both the name of the person making the comment and the text of the comment//
+
+//Member variable : data type//
+_name: string
+_text: string
+
+GetDisplayText(): string // {Name} \n{Text} //
+
+class Program
+
+//Create 3-4 videos, set appropriate values, and for each video add a list of 3-4 comments(with name and text). Put each video in a list of videos.//
+_videos: List<Video>
+
+DisplayVideoContent(): string //"title + author + length + numberOfComments"
+foreach loop to display comments //Iterate through and list out all of the comments

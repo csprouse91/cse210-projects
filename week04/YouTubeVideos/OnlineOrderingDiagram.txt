@@ -1,0 +1,53 @@
+Online Ordering Program Diagram
+
+class Product
+//member variables: data type
+_name: string
+_productId: string or int?
+_price: float or double?
+_quantity: int
+//Method to compute total for each product in order
+ComputeSum(): double //_quantity x _price 
+
+class Customer
+//member variable: data type
+_name: string
+_address: Address
+_inUSA: bool
+//Method to return domestic bool
+InUSA(): bool 
+
+class Address
+_streetAddress: string
+_city: string
+_stateprovince: string
+_country: string
+_inUSA: bool
+//Method to return if it is in the USA or not
+InUSA(): bool
+//Method to return string with newlines for address appropriately
+GetAddressText(): string //"street address" /n "city, state, country"
+
+class Order
+//Responsibilities
+//Contain a list of products and a customer. Can calculate total cost of the order.
+_products: List<Product>
+_customer: Customer
+_total: float or double?
+
+//Return a string for the packing label.
+GetPackingLabel(): string //name + product id of each product in the order 
+
+//The total price is calculated as the sum of the total cost of each product plus a one-time shipping cost
+//USA based company. If inUSA shipping is $5. If not inUSA shipping is $35.
+ComputeSum(): double //Get total from order and add shipping cost 
+
+//Shipping label should list the name and address of the customer
+ Return a string for the shipping label.
+GetShippingLabel(): string 
+
+class Program
+//Make sure that all member variables are private and getters, setters, and constructors are created as needed.
+
+//Once you have created these classes, write a program that creates at least two orders with a 2-3 products each. 
+//Call the methods to get the packing label, the shipping label, and the total price of the order, and display the results of these methods.
