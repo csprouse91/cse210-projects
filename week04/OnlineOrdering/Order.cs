@@ -2,12 +2,14 @@ public class Order
 {
     private List<Product> _products = new List<Product>();
     private Customer _customer;
-    double _total;
+    private float _total;
 
     //Constructor
     public Order(Customer customer)
     {
         _customer = customer;
+        List<Product> _products = new List<Product>();
+        _total = 0;
     }
     //Method to add a product object to the List<Product>
     public void AddProduct(Product product)
@@ -27,7 +29,7 @@ public class Order
     }
     //Method to return the total price of the order conditional of domestic or international
     //Domestic shipping is $5 and international shipping is $35
-    public double GetTotal()
+    public float GetTotal()
     {
         foreach (Product product in _products)
         {
@@ -46,7 +48,7 @@ public class Order
     public string GetShippingLabel()
     {
         string shippingLabel = "";
-        shippingLabel += _customer.GetCustomerInfo() + "\n";
+        shippingLabel += _customer.GetCustomerInfo();
         return shippingLabel;
     }
 }

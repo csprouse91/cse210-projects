@@ -4,7 +4,6 @@ public class Customer
 {
     private string _name;
     private Address _address;
-    private bool _inUSA;
 
     //Constructor
     public Customer(string name, Address address)

@@ -15,7 +15,7 @@ public class Product
         _quantity = quantity;
     }
     //Methods
-    public double ComputeSum()
+    public float ComputeSum()
     {
         return _price * _quantity;
     }
