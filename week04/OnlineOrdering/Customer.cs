@@ -3,7 +3,7 @@ using System.Net.Sockets;
 public class Customer
 {
     private string _name;
-    Address _address;
+    private Address _address;
     private bool _inUSA;
 
     //Constructor
@@ -18,5 +18,9 @@ public class Customer
     {
         return _address.IsInUSA();
     }
-
+    //Method to get customer name and address
+    public string GetCustomerInfo()
+    {
+        return _name + "\n" + _address.GetAddressText();
+    }
 }
