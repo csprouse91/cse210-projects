@@ -1,0 +1,21 @@
+//Subclass of Assignment
+public class MathAssignment : Assignment
+{
+    private string _section;
+    private string _problems;
+
+    //Constructor
+    public MathAssignment(string name, string topic, string section, string problems) : base(name, topic)
+    {
+        _section = section;
+        _problems = problems;
+    }
+
+    //Method to return Homework List "Section {_section} Problems {_problems}"
+    public string GetHomeWorkList()
+    {
+        return $"Section {_section} Problems {_problems}";
+    }
+
+    
+}
