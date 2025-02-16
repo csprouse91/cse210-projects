@@ -13,5 +13,13 @@ public class BreathingActivity : Activity
         _duration = duration;
     }
 
-    
+    public void Run()
+    {
+        DisplayStartMessage();
+        
+        DisplayCountdown(_duration);
+
+
+        DisplayEndMessage();
+    }
 }

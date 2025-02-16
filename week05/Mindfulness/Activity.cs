@@ -20,14 +20,18 @@ public class Activity
     {
         Console.WriteLine("Welcome to the " + _name + " activity!");
         Console.WriteLine(_description);
+        Console.WriteLine($"Please enter how long you wish this activity to last in seconds: ");
+        do
+        {
+            string userInput = Console.ReadLine();
+            int duration = int.Parse(userInput);
+            if (duration <= 0)
+            {
+                Console.WriteLine("Please enter a valid number for the duration in seconds: ");
+            }
+        } while (_duration != );
+
         Console.WriteLine("Please prepare to begin. ");
-        //Pause for 3 seconds
-        Console.WriteLine("3...");
-        System.Threading.Thread.Sleep(1000);
-        Console.WriteLine("2...");
-        System.Threading.Thread.Sleep(1000);
-        Console.WriteLine("1...");
-        System.Threading.Thread.Sleep(1000);
     }
 
     //Method to display ending message
@@ -35,8 +39,6 @@ public class Activity
     {
         Console.WriteLine($"Good job!");
         Console.WriteLine($"After {_duration} seconds, you have completed the {_name} activity. ");
-        //Pause for 3 seconds and finishes the activity
-
     }
 
     //Method to display the countdown (timer)
