@@ -7,8 +7,11 @@ public class ReflectionActivity : Activity
     //New member variables
     private List<string> _prompts;
     private List<string> _questions;
+    //New member variables to avoid duplicate random prompts and questions
     private List<string> _displayedPrompts;
     private List<string> _displayedQuestions;
+    private bool _useQuestions = true;
+    private bool _usePrompts = true;
 
     //Constructor
     public ReflectionActivity(string name = "Reflection", string description = "During this activity, you will be provided a prompt to focus and reflect on. You will then be asked a question to answer. You do not have to write anything down, just reflect on your experience. Recognize your power in life and the impact it can have. ", int duration = 0) : base(name, description, duration)
@@ -26,50 +29,186 @@ public class ReflectionActivity : Activity
     //Methods
     public string GetRandomPrompt()
     {
-        //Create a random index
-        int randomIndex = new Random().Next(0, prompts.Count);
-        //Return the prompt at the random index
-        return prompts[randomIndex];
+        //Searched for this code online to avoid duplicate random prompts
+        if (_prompts.Count > 0 || _displayedPrompts.Count > 0)
+        {
+            if (_usePrompts && _prompts.Count > 0)
+            {
+                //Create a random index
+                int randomIndex = new Random().Next(0, _prompts.Count);
+                //Return the prompt at the random index
+                return _prompts[randomIndex];
+            }
+            else if (!_usePrompts && _displayedPrompts.Count > 0)
+            {
+                //Create a random index
+                int randomIndex = new Random().Next(0, _displayedPrompts.Count);
+                //Return the prompt at the random index
+                return _displayedPrompts[randomIndex];
+            }
+            else
+            {
+                return "No prompts available.";
+            }
+
+        }
+        else
+        {
+            return "No prompts available.";
+        }
+
     }
 
-    public string GetRandomQuestion(List<string> questions)
+    public string GetRandomQuestion()
     {
-        //Create a random index
-        int randomIndex = new Random().Next(0, questions.Count);
-        //Return the question at the random index
-        return questions[randomIndex];
+        //Searched for this code online to avoid duplicate random questions
+        if (_questions.Count > 0 || _displayedQuestions.Count > 0)
+        {
+            if (_useQuestions && _questions.Count > 0)
+            {
+                //Create a random index
+                int randomIndex = new Random().Next(0, _questions.Count);
+                //Return the question at the random index
+                return _questions[randomIndex];
+            }
+            else if (!_useQuestions && _displayedQuestions.Count > 0)
+            {
+                //Create a random index
+                int randomIndex = new Random().Next(0, _displayedQuestions.Count);
+                //Return the question at the random index
+                return _displayedQuestions[randomIndex];
+            }
+            else
+            {
+                return "No questions available.";
+            }
+        }
+        else
+        {
+            return "No questions available.";
+        }
     }
 
     //Display methods
-    //This method will display the random prompt and then remove it from the list
+    //This method will display the random prompt and then remove it from the list, add to displayed, and set
+    //_usePrompts to false if the list is empty
     public void DisplayPrompt()
     {
-        string randomPrompt = GetRandomPrompt();
-        Console.WriteLine($"------{randomPrompt}------");
-        if (_prompts.Count > 0)
+
+        if (_usePrompts && _prompts.Count > 0)
+        {
+            string randomPrompt = GetRandomPrompt();
+            Console.WriteLine($"------{randomPrompt}------");
             foreach (string prompt in _prompts)
             {
                 if (randomPrompt == prompt)
                 {
                     _prompts.Remove(prompt);
+                    _displayedPrompts.Add(prompt);
                 }
             }
+        }
+        else if (_usePrompts && _prompts.Count == 0)
+        {
+            _usePrompts = false;
+            string randomPrompt = GetRandomPrompt();
+            Console.WriteLine($"------{randomPrompt}------");
+            foreach (string prompt in _displayedPrompts)
+            {
+                if (randomPrompt == prompt)
+                {
+                    _prompts.Add(prompt);
+                    _displayedPrompts.Remove(prompt);
+                }
+            }
+        }
+        else if (!_usePrompts && _displayedPrompts.Count > 0)
+        {
+            string randomPrompt = GetRandomPrompt();
+            Console.WriteLine($"------{randomPrompt}------");
+            foreach (string prompt in _displayedPrompts)
+            {
+                if (randomPrompt == prompt)
+                {
+                    _displayedPrompts.Remove(prompt);
+                    _prompts.Add(prompt);
+                }
+            }
+        }
+        else if (!_usePrompts && _displayedPrompts.Count == 0)
+        {
+            _usePrompts = true;
+            string randomPrompt = GetRandomPrompt();
+            Console.WriteLine($"------{randomPrompt}------");
+            foreach (string prompt in _prompts)
+            {
+                if (randomPrompt == prompt)
+                {
+                    _displayedPrompts.Add(prompt);
+                    _prompts.Remove(prompt);
+                }
+            }
+        }
+
 
     }
     //This method will display the random question and then remove it from the list
     public void DisplayQuestion()
     {
-
-        string randomQuestion = GetRandomQuestion();
-        Console.WriteLine(randomQuestion);
-        foreach (string question in _questions)
+        if (_useQuestions && _questions.Count > 0)
         {
-            if (randomQuestion == question)
+            string randomQuestion = GetRandomQuestion();
+            Console.WriteLine($"------{randomQuestion}------");
+            foreach (string question in _questions)
             {
-                _questions.Remove(question);
+                if (randomQuestion == question)
+                {
+                    _questions.Remove(question);
+                    _displayedQuestions.Add(question);
+                }
             }
         }
-
+        else if (_useQuestions && _questions.Count == 0)
+        {
+            _useQuestions = false;
+            string randomQuestion = GetRandomQuestion();
+            Console.WriteLine($"------{randomQuestion}------");
+            foreach (string question in _displayedQuestions)
+            {
+                if (randomQuestion == question)
+                {
+                    _questions.Add(question);
+                    _displayedQuestions.Remove(question);
+                }
+            }
+        }
+        else if (!_useQuestions && _displayedQuestions.Count > 0)
+        {
+            string randomQuestion = GetRandomQuestion();
+            Console.WriteLine($"------{randomQuestion}------");
+            foreach (string question in _displayedQuestions)
+            {
+                if (randomQuestion == question)
+                {
+                    _displayedQuestions.Remove(question);
+                    _questions.Add(question);
+                }
+            }
+        }
+        else if (!_useQuestions && _displayedQuestions.Count == 0)
+        {
+            _useQuestions = true;
+            string randomQuestion = GetRandomQuestion();
+            Console.WriteLine($"------{randomQuestion}------");
+            foreach (string question in _questions)
+            {
+                if (randomQuestion == question)
+                {
+                    _displayedQuestions.Add(question);
+                    _questions.Remove(question);
+                }
+            }
+        }
     }
 
     //Method to add prompts
@@ -135,7 +274,7 @@ public class ReflectionActivity : Activity
         DateTime currentTime;
         do
         {
-            DisplayQuestion();//Display question and remove from list
+            DisplayQuestion();
             DisplayPauseAnimation(7);
 
             currentTime = DateTime.Now;
