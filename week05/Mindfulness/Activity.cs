@@ -5,7 +5,7 @@ public class Activity
 {
     protected string _name;//name of the activity, a description, asks for and sets the duration in seconds, then tell user to prepare to begin and pause
     protected string _description;
-    protected int _duration;//Should show some sort of animation to the user (spinner, countdown, periodic dots)
+    protected int _duration;
 
     //Constructor
     public Activity(string name, string description, int duration)
