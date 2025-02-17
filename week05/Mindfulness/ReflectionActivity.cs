@@ -36,14 +36,32 @@ public class ReflectionActivity : Activity
     }
 
     //Display methods
+    //This method will display the random prompt and then remove it from the list
     public void DisplayPrompt()
     {
-        Console.WriteLine($"------{GetRandomPrompt()}------");
+        string randomPrompt = GetRandomPrompt();
+        Console.WriteLine($"------{randomPrompt}------");
+        foreach (string prompt in _prompts)
+        {
+            if (randomPrompt == prompt)
+            {
+                _prompts.Remove(prompt);
+            }
+        }
     }
-
+    //This method will display the random question and then remove it from the list
     public void DisplayQuestion()
     {
-        Console.WriteLine(GetRandomQuestion());
+        string randomQuestion = GetRandomQuestion();
+        Console.WriteLine(randomQuestion);
+        foreach (string question in _questions)
+        {
+            if (randomQuestion == question)
+            {
+                _questions.Remove(question);
+            }
+        }
+
     }
 
     //Method to add prompts
@@ -91,18 +109,27 @@ public class ReflectionActivity : Activity
         DisplayStartMessage();
         //Pause for a few seconds
         DisplayPauseAnimation(3);
+        Console.WriteLine("Consider the following prompt:");
+        Console.WriteLine();
+        //Display prompt to reflect on
+        DisplayPrompt();
+        Console.WriteLine();
+        Console.WriteLine("Reflect on the prompt for a few moments. Press enter to continue.");
+        Console.ReadLine();
+        Console.WriteLine("Now ponder the following questions as they relate to your experience.");
+        Console.WriteLine("Prepare to begin:");
+        //Pause for several seconds
+        DisplayPauseAnimation(5);
+        Console.Clear();
         //Set timer                
         DateTime startTime = DateTime.Now;
         DateTime futureTime = startTime.AddSeconds(_duration);
         DateTime currentTime;
         do
         {
-            DisplayPrompt();
-            Console.WriteLine("Reflect on the prompt for a few moments. Press enter to continue.");
-            string userInput = Console.Read()
+            DisplayQuestion();//Display question and remove from list
+            DisplayPauseAnimation(7);
 
-            DisplayCountdown(5);
-            DisplayCountdown(5);
             currentTime = DateTime.Now;
         } while (currentTime < futureTime);
 
