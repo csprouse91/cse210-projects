@@ -23,36 +23,70 @@ public class Activity
         Console.WriteLine($"Please enter how long you wish this activity to last in seconds: ");
         do
         {
-            string userInput = Console.ReadLine();
-            int duration = int.Parse(userInput);
-            if (duration <= 0)
+            int userInput = int.Parse(Console.ReadLine());
+            if (userInput <= 0)
             {
-                Console.WriteLine("Please enter a valid number for the duration in seconds: ");
+                Console.WriteLine("Number of seconds must be greater than 0.");
             }
-        } while (_duration != );
+            else
+            {
+                try
+                {
+                    _duration = userInput;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Please enter a valid number. ");
+                }
+            }
+        } while (_duration <= 0);
+        Console.Clear();
+        Console.WriteLine($"Prepare to begin the {_name} activity for {_duration} seconds.");
 
-        Console.WriteLine("Please prepare to begin. ");
     }
 
     //Method to display ending message
     public void DisplayEndMessage()
     {
         Console.WriteLine($"Good job!");
+        DisplayPauseAnimation(3);
         Console.WriteLine($"After {_duration} seconds, you have completed the {_name} activity. ");
+        //pause for several seconds
+        DisplayPauseAnimation(5);
+
     }
 
     //Method to display the countdown (timer)
     public void DisplayCountdown(int seconds)
     {
-        while (seconds > 0)
+        do
         {
-        }
+            Console.WriteLine("\b");
+            Console.WriteLine($"{seconds}");
+            seconds--;
+            Thread.Sleep(1000);
+            Console.WriteLine("\b\b");
+        } while (seconds > 0);
     }
 
     //Method to display a pause animation
     public void DisplayPauseAnimation(int seconds)
     {
+        do
+        {
+            Console.WriteLine(".");
+            Thread.Sleep(250);
+            Console.WriteLine("\b\b");
+            Console.WriteLine("..");
+            Thread.Sleep(250);
+            Console.WriteLine("\b\b\b");
+            Console.WriteLine("...");
+            Thread.Sleep(250);
+            Console.WriteLine("\b\b\b\b");
+            Thread.Sleep(250);
+            seconds--;
 
+        } while (seconds > 0);
     }
 
 }

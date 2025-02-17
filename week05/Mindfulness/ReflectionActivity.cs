@@ -11,6 +11,7 @@ public class ReflectionActivity : Activity
     public ReflectionActivity(string name, string description, int duration) : base(name, description, duration)
     {
         _name = "Reflection";
-        _description = "During this activity, take time to reflect on the prompt. "
+        _description = "During this activity, you will be provided a prompt to focus and reflect on. You will then be asked a question to answer. You do not have to write anything down, just reflect on your experience. Recognize your power in life and the impact it can have. ";
+        _duration = duration;
     }
 }

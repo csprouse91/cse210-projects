@@ -6,20 +6,31 @@ public class BreathingActivity : Activity
     //No new member variables
 
     //Constructor
-    public BreathingActivity(string name, string description, int duration) : base(name, description, duration)
+    public BreathingActivity(string name = "Breathing", string description = "During this activity, you will need to focus on your breathing. Follow the prompts and take deep breaths. Clear your mind and focus entirely on your breathing.", int duration = 0) : base(name, description, duration)
     {
-        _name = "Breathing";
-        _description = "During this activity, you will need to focus on your breathing. Follow the prompts and take deep breaths. Clear your mind and focus entirely on your breathing.";
+        _name = name;
+        _description = description;
         _duration = duration;
     }
 
     public void Run()
     {
         DisplayStartMessage();
+        //Pause for a few seconds
+        DisplayPauseAnimation(3);
+        //Set timer                
+        DateTime startTime = DateTime.Now;
+        DateTime futureTime = startTime.AddSeconds(_duration);
+        DateTime currentTime;
+        do 
+        {
+            Console.WriteLine("Breathe in...");
+            DisplayCountdown(5);
+            Console.WriteLine("Breathe out...");
+            DisplayCountdown(5);
+            currentTime = DateTime.Now;
+        }while (currentTime < futureTime);
         
-        DisplayCountdown(_duration);
-
-
         DisplayEndMessage();
     }
 }
