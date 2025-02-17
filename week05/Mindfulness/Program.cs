@@ -1,5 +1,5 @@
 using System;
-
+//Added code in the reflection and listing activities to display the prompts and questions and remove them from the list
 class Program
 {
     static void Main(string[] args)
@@ -20,7 +20,11 @@ class Program
                 BreathingActivity breathing1 = new BreathingActivity();
                 breathing1.Run();
                 break;
+            case 2: //User selects Reflection Activity
+                ReflectionActivity reflection1 = new ReflectionActivity();
+                reflection1.Run();
+                break;
         }
-              
+
     }
 }

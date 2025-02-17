@@ -16,21 +16,19 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartMessage();
-        //Pause for a few seconds
-        DisplayPauseAnimation(3);
         //Set timer                
         DateTime startTime = DateTime.Now;
         DateTime futureTime = startTime.AddSeconds(_duration);
         DateTime currentTime;
-        do 
+        do
         {
-            Console.WriteLine("Breathe in...");
+            Console.Write("\nBreathe in...");
             DisplayCountdown(5);
-            Console.WriteLine("Breathe out...");
+            Console.Write("\nBreathe out...");
             DisplayCountdown(5);
             currentTime = DateTime.Now;
-        }while (currentTime < futureTime);
-        
+        } while (currentTime < futureTime);
+
         DisplayEndMessage();
     }
 }

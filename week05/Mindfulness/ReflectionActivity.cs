@@ -1,5 +1,6 @@
 //Subclass of Activity
 using System;
+using System.ComponentModel;
 
 public class ReflectionActivity : Activity
 {
@@ -52,6 +53,7 @@ public class ReflectionActivity : Activity
     //This method will display the random question and then remove it from the list
     public void DisplayQuestion()
     {
+
         string randomQuestion = GetRandomQuestion();
         Console.WriteLine(randomQuestion);
         foreach (string question in _questions)
@@ -107,15 +109,13 @@ public class ReflectionActivity : Activity
         AddQuestion("What advice would you give to yourself, if you were able to in that situation?");
         AddQuestion("What did you learn about yourself?");
         DisplayStartMessage();
-        //Pause for a few seconds
-        DisplayPauseAnimation(3);
         Console.WriteLine("Consider the following prompt:");
         Console.WriteLine();
         //Display prompt to reflect on
         DisplayPrompt();
         Console.WriteLine();
         Console.WriteLine("Reflect on the prompt for a few moments. Press enter to continue.");
-        Console.ReadLine();
+        Console.Read();
         Console.WriteLine("Now ponder the following questions as they relate to your experience.");
         Console.WriteLine("Prepare to begin:");
         //Pause for several seconds

@@ -42,7 +42,7 @@ public class Activity
         } while (_duration <= 0);
         Console.Clear();
         Console.WriteLine($"Prepare to begin the {_name} activity for {_duration} seconds.");
-
+        DisplayPauseAnimation(3);
     }
 
     //Method to display ending message
@@ -61,11 +61,10 @@ public class Activity
     {
         do
         {
-            Console.WriteLine("\b");
-            Console.WriteLine($"{seconds}");
+            Console.Write(seconds);
             seconds--;
             Thread.Sleep(1000);
-            Console.WriteLine("\b\b");
+            Console.Write("\b \b");
         } while (seconds > 0);
     }
 
@@ -74,15 +73,15 @@ public class Activity
     {
         do
         {
-            Console.WriteLine(".");
+            Console.Write(".");
             Thread.Sleep(250);
-            Console.WriteLine("\b\b");
-            Console.WriteLine("..");
+            Console.Write("\b \b");
+            Console.Write("..");
             Thread.Sleep(250);
-            Console.WriteLine("\b\b\b");
-            Console.WriteLine("...");
+            Console.Write("\b \b\b \b");
+            Console.Write("...");
             Thread.Sleep(250);
-            Console.WriteLine("\b\b\b\b");
+            Console.Write("\b \b\b \b\b\b \b");
             Thread.Sleep(250);
             seconds--;
 
