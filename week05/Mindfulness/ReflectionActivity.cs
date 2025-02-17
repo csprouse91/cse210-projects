@@ -7,6 +7,8 @@ public class ReflectionActivity : Activity
     //New member variables
     private List<string> _prompts;
     private List<string> _questions;
+    private List<string> _displayedPrompts;
+    private List<string> _displayedQuestions;
 
     //Constructor
     public ReflectionActivity(string name = "Reflection", string description = "During this activity, you will be provided a prompt to focus and reflect on. You will then be asked a question to answer. You do not have to write anything down, just reflect on your experience. Recognize your power in life and the impact it can have. ", int duration = 0) : base(name, description, duration)
@@ -16,24 +18,26 @@ public class ReflectionActivity : Activity
         _duration = duration;
 
         _prompts = new List<string>();
+        _displayedPrompts = new List<string>();
         _questions = new List<string>();
+        _displayedQuestions = new List<string>();
     }
 
     //Methods
     public string GetRandomPrompt()
     {
         //Create a random index
-        int randomIndex = new Random().Next(0, _prompts.Count);
+        int randomIndex = new Random().Next(0, prompts.Count);
         //Return the prompt at the random index
-        return _prompts[randomIndex];
+        return prompts[randomIndex];
     }
 
-    public string GetRandomQuestion()
+    public string GetRandomQuestion(List<string> questions)
     {
         //Create a random index
-        int randomIndex = new Random().Next(0, _questions.Count);
+        int randomIndex = new Random().Next(0, questions.Count);
         //Return the question at the random index
-        return _questions[randomIndex];
+        return questions[randomIndex];
     }
 
     //Display methods
@@ -42,13 +46,15 @@ public class ReflectionActivity : Activity
     {
         string randomPrompt = GetRandomPrompt();
         Console.WriteLine($"------{randomPrompt}------");
-        foreach (string prompt in _prompts)
-        {
-            if (randomPrompt == prompt)
+        if (_prompts.Count > 0)
+            foreach (string prompt in _prompts)
             {
-                _prompts.Remove(prompt);
+                if (randomPrompt == prompt)
+                {
+                    _prompts.Remove(prompt);
+                }
             }
-        }
+
     }
     //This method will display the random question and then remove it from the list
     public void DisplayQuestion()
@@ -108,6 +114,8 @@ public class ReflectionActivity : Activity
         AddQuestion("What would you do differently next time?");
         AddQuestion("What advice would you give to yourself, if you were able to in that situation?");
         AddQuestion("What did you learn about yourself?");
+        //Get a count of the prompts and questions in each list before the activity begins
+        //Display the start message
         DisplayStartMessage();
         Console.WriteLine("Consider the following prompt:");
         Console.WriteLine();

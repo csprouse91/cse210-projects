@@ -17,14 +17,19 @@ class Program
         switch (userInput)
         {
             case 1: //User selects Breathing Activity
-                BreathingActivity breathing1 = new BreathingActivity();
-                breathing1.Run();
+                BreathingActivity breathing = new BreathingActivity();
+                breathing.Run();
                 break;
             case 2: //User selects Reflection Activity
-                ReflectionActivity reflection1 = new ReflectionActivity();
-                reflection1.Run();
+                ReflectionActivity reflection = new ReflectionActivity();
+                reflection.Run();
                 break;
-        }
+            case 3: //User selects Listing Activity
+                ListingActivity listing = new ListingActivity();
+                listing.Run();
+                break;
+
+        }   
 
     }
 }

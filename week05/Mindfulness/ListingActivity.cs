@@ -9,10 +9,21 @@ public class ListingActivity : Activity
     private int _count;
 
     //Constructor
-    public ListingActivity(string name, string description, int duration) : base(name, description, duration)
+    public ListingActivity(string name = "Listing", string description = "", int duration = 0) : base(name, description, duration)
     {
-        _name = "Listing";
-        _description = "";
+        _name = name;
+        _description = description;
         _duration = duration;
     }
+
+    //Methods
+    public string GetRandomPrompt()
+    {
+        //Create a random index
+        int randomIndex = new Random().Next(0, _prompts.Count);
+        //Return the prompt at the random index
+        return _prompts[randomIndex];
+    }
+
+    
 }
