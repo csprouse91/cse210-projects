@@ -236,39 +236,38 @@ public class ReflectionActivity : Activity
         AddPrompt("Think of a time you made a mistake and learned from it.");
         //Add string objects to the list<string> called _questions
         AddQuestion("Why was this experience meaningful to you?");
-        AddQuestion("Have you ever been in a similar situation?");
-        AddQuestion("What was the first thing you thought of?");
-        AddQuestion("How did you feel during this experience?");
         AddQuestion("What did you learn from this that you can apply to other situations? ");
-        AddQuestion("What made this experience unique?");
         AddQuestion("What would you do differently next time?");
         AddQuestion("What advice would you give to yourself, if you were able to in that situation?");
         AddQuestion("What did you learn about yourself?");
         //Display the start message
         DisplayStartMessage();
-        Console.WriteLine("Consider the following prompt:");
-        Console.WriteLine();
-        //Display prompt to reflect on
-        DisplayPrompt();
-        Console.WriteLine();
-        Console.WriteLine("Reflect on the prompt for a few moments. Press enter to continue.");
-        Console.Read();
-        Console.WriteLine("Now ponder the following questions as they relate to your experience.");
-        Console.WriteLine("Prepare to begin:");
-        //Pause for several seconds
-        DisplayPauseAnimation(5);
-        Console.Clear();
+
         //Set timer                
         DateTime startTime = DateTime.Now;
         DateTime futureTime = startTime.AddSeconds(_duration);
         DateTime currentTime;
         do
         {
-            DisplayQuestion();
+            Console.WriteLine("Consider the following prompt:");
             Console.WriteLine();
+            //Display prompt to reflect on
+            DisplayPrompt();
+            Console.WriteLine();
+            Console.WriteLine("Reflect on the prompt for a few moments. Press enter to continue.");
+            Console.Read();
+            Console.WriteLine("Now ponder the following questions as they relate to your experience.");
+            Console.WriteLine("Prepare to begin:");
+            //Pause for several seconds
             DisplayPauseAnimation(5);
-
-            currentTime = DateTime.Now;
+            Console.Clear();
+            do
+            {
+                DisplayQuestion();
+                Console.WriteLine();
+                DisplayPauseAnimation(5);
+                currentTime = DateTime.Now;
+            } while (_useQuestions || currentTime < futureTime);
         } while (currentTime < futureTime);
 
         DisplayEndMessage();
