@@ -1,6 +1,6 @@
 //Subclass of Activity
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 
 public class ReflectionActivity : Activity
 {
@@ -88,7 +88,54 @@ public class ReflectionActivity : Activity
             return "No questions available.";
         }
     }
-
+    //Method to move prompt from list to displayed list
+    public void MoveToDisplayedPrompts(string prompt)
+    {
+        for (int index = 0; index < _prompts.Count; index++)
+        {
+            if (prompt == _prompts[index])
+            {
+                _prompts.Remove(prompt);
+                _displayedPrompts.Add(prompt);
+            }
+        }
+    }
+    //Method to move prompt from displayed list to list
+    public void MoveFromDisplayedPrompts(string prompt)
+    {
+        for (int index = 0; index < _displayedPrompts.Count; index++)
+        {
+            if (prompt == _displayedPrompts[index])
+            {
+                _displayedPrompts.Remove(prompt);
+                _prompts.Add(prompt);
+            }
+        }
+    }
+    //Metho to move question from list to displayed list
+    public void MoveToDisplayedQuestions(string question)
+    {
+        for (int index = 0; index < _questions.Count; index++)
+        {
+            if (question == _questions[index])
+            {
+                _questions.Remove(question);
+                _displayedQuestions.Add(question);
+            }
+        }
+    }
+    //Method to move question from displayed list to list
+    public void MoveFromDisplayedQuestions(string question)
+    {
+        for (int index = 0; index < _displayedQuestions.Count; index++)
+        {
+            if (question == _displayedQuestions[index])
+            {
+                _displayedQuestions.Remove(question);
+                _questions.Add(question);
+            }
+        }
+    }
     //Display methods
     //This method will display the random prompt and then remove it from the list, add to displayed, and set
     //_usePrompts to false if the list is empty
@@ -99,55 +146,27 @@ public class ReflectionActivity : Activity
         {
             string randomPrompt = GetRandomPrompt();
             Console.WriteLine($"------{randomPrompt}------");
-            foreach (string prompt in _prompts)
-            {
-                if (randomPrompt == prompt)
-                {
-                    _prompts.Remove(prompt);
-                    _displayedPrompts.Add(prompt);
-                }
-            }
+            MoveToDisplayedPrompts(randomPrompt);
         }
         else if (_usePrompts && _prompts.Count == 0)
         {
             _usePrompts = false;
             string randomPrompt = GetRandomPrompt();
             Console.WriteLine($"------{randomPrompt}------");
-            foreach (string prompt in _displayedPrompts)
-            {
-                if (randomPrompt == prompt)
-                {
-                    _prompts.Add(prompt);
-                    _displayedPrompts.Remove(prompt);
-                }
-            }
+            MoveFromDisplayedPrompts(randomPrompt);
         }
         else if (!_usePrompts && _displayedPrompts.Count > 0)
         {
             string randomPrompt = GetRandomPrompt();
             Console.WriteLine($"------{randomPrompt}------");
-            foreach (string prompt in _displayedPrompts)
-            {
-                if (randomPrompt == prompt)
-                {
-                    _displayedPrompts.Remove(prompt);
-                    _prompts.Add(prompt);
-                }
-            }
+            MoveFromDisplayedPrompts(randomPrompt);
         }
         else if (!_usePrompts && _displayedPrompts.Count == 0)
         {
             _usePrompts = true;
             string randomPrompt = GetRandomPrompt();
             Console.WriteLine($"------{randomPrompt}------");
-            foreach (string prompt in _prompts)
-            {
-                if (randomPrompt == prompt)
-                {
-                    _displayedPrompts.Add(prompt);
-                    _prompts.Remove(prompt);
-                }
-            }
+            MoveToDisplayedPrompts(randomPrompt);
         }
 
 
@@ -158,56 +177,28 @@ public class ReflectionActivity : Activity
         if (_useQuestions && _questions.Count > 0)
         {
             string randomQuestion = GetRandomQuestion();
-            Console.WriteLine($"------{randomQuestion}------");
-            foreach (string question in _questions)
-            {
-                if (randomQuestion == question)
-                {
-                    _questions.Remove(question);
-                    _displayedQuestions.Add(question);
-                }
-            }
+            Console.WriteLine(randomQuestion);
+            MoveToDisplayedQuestions(randomQuestion);
         }
         else if (_useQuestions && _questions.Count == 0)
         {
             _useQuestions = false;
             string randomQuestion = GetRandomQuestion();
-            Console.WriteLine($"------{randomQuestion}------");
-            foreach (string question in _displayedQuestions)
-            {
-                if (randomQuestion == question)
-                {
-                    _questions.Add(question);
-                    _displayedQuestions.Remove(question);
-                }
-            }
+            Console.WriteLine(randomQuestion);
+            MoveFromDisplayedQuestions(randomQuestion);
         }
         else if (!_useQuestions && _displayedQuestions.Count > 0)
         {
             string randomQuestion = GetRandomQuestion();
-            Console.WriteLine($"------{randomQuestion}------");
-            foreach (string question in _displayedQuestions)
-            {
-                if (randomQuestion == question)
-                {
-                    _displayedQuestions.Remove(question);
-                    _questions.Add(question);
-                }
-            }
+            Console.WriteLine(randomQuestion);
+            MoveFromDisplayedQuestions(randomQuestion);
         }
         else if (!_useQuestions && _displayedQuestions.Count == 0)
         {
             _useQuestions = true;
             string randomQuestion = GetRandomQuestion();
-            Console.WriteLine($"------{randomQuestion}------");
-            foreach (string question in _questions)
-            {
-                if (randomQuestion == question)
-                {
-                    _displayedQuestions.Add(question);
-                    _questions.Remove(question);
-                }
-            }
+            Console.WriteLine(randomQuestion);
+            MoveToDisplayedQuestions(randomQuestion);
         }
     }
 
@@ -253,7 +244,6 @@ public class ReflectionActivity : Activity
         AddQuestion("What would you do differently next time?");
         AddQuestion("What advice would you give to yourself, if you were able to in that situation?");
         AddQuestion("What did you learn about yourself?");
-        //Get a count of the prompts and questions in each list before the activity begins
         //Display the start message
         DisplayStartMessage();
         Console.WriteLine("Consider the following prompt:");
@@ -275,7 +265,8 @@ public class ReflectionActivity : Activity
         do
         {
             DisplayQuestion();
-            DisplayPauseAnimation(7);
+            Console.WriteLine();
+            DisplayPauseAnimation(5);
 
             currentTime = DateTime.Now;
         } while (currentTime < futureTime);

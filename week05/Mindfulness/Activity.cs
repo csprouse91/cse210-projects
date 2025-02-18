@@ -69,7 +69,7 @@ public class Activity
     }
 
     //Method to display a pause animation
-    public void DisplayPauseAnimation(int seconds)
+    public void DisplayPauseAnimation(int seconds = 3)
     {
         do
         {
