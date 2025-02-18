@@ -28,7 +28,7 @@ public class ChecklistGoal : Goal
 
     public override string GetDetailsString()
     {
-        return base.GetDetailsString() + " - " + _amountCompleted + "/" + _target + " - " + _bonus;
+        return base.GetDetailsString() + " - " + _amountCompleted + "/" + _target;
     }
 
     public override string GetStringRepresentation()

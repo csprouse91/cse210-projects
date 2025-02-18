@@ -25,6 +25,11 @@ public abstract class Goal
     {
         return _shortName + " - " + _description + " - " + _points;
     }
+    //Added GetName method 
+    public string GetName()
+    {
+        return _shortName;
+    }
 
     public abstract string GetStringRepresentation();
 
