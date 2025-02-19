@@ -45,14 +45,13 @@ public class GoalManager
                     string goalDescription = Console.ReadLine();
                     Console.Write("How many points is this goal worth?");
                     string goalPoints = Console.ReadLine();
-
                     if (goalType == "3")
                     {
                         Console.Write("How many times must you complete this goal to earn bonus points?");
                         int target = int.Parse(Console.ReadLine());
                         Console.Write("How many bonus points do you want this to be?");
                         int bonus = int.Parse(Console.ReadLine());
-                        CreateGoal(goalType, goalName, goalDescription, goalPoints, target, bonus);
+                        CreateGoal(goalType, goalName, goalDescription, goalPoints, false, target, bonus);
                         break;
                     }
                     else
@@ -158,7 +157,16 @@ public class GoalManager
 
     public void SaveGoals()
     {
+        Console.Write("Enter the filename to save the goals to (include .txt): ");
+        string filename = Console.ReadLine();
 
+        using (StreamWriter outputFile = new StreamWriter(filename))
+        {
+            foreach (Goal goal in _goals)
+            {
+                outputFile.WriteLine(goal.GetStringRepresentation());
+            }
+        }
     }
 
     public void LoadGoals()
@@ -186,10 +194,10 @@ public class GoalManager
             }
             else if (goalType == "ChecklistGoal")
             {
-                amount = int.Parse(goalDetails[3]);
-                target = int.Parse(goalDetails[4]);
-                bonus = int.Parse(goalDetails[5]);
-                CreateGoal(goalType, name, description, points, isComplete = false, amount, target, bonus);
+                bonus = int.Parse(goalDetails[3]);
+                amount = int.Parse(goalDetails[4]);
+                target = int.Parse(goalDetails[5]);
+                CreateGoal(goalType, name, description, points, bonus, amount, target, false);
             }
             else if (goalType == "EternalGoal")
             {
