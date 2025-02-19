@@ -1,5 +1,6 @@
 //Subclass of Goal superclass
 using System;
+using System.IO;
 
 public class ChecklistGoal : Goal
 {
@@ -9,9 +10,9 @@ public class ChecklistGoal : Goal
     private int _bonus;
 
     //Constructor
-    public ChecklistGoal(string name, string description, string points, int target, int bonus) : base(name, description, points)
+    public ChecklistGoal(string name, string description, string points, int amount, int target, int bonus) : base(name, description, points)
     {
-        _amountCompleted = 0;
+        _amountCompleted = amount;
         _target = target;
         _bonus = bonus;
     }
@@ -19,11 +20,24 @@ public class ChecklistGoal : Goal
     //Methods
     public override void RecordEvent()
     {
+        _amountCompleted++;
+        if (_amountCompleted == _target)
+        {
+            _points = (int.Parse(_points) + _bonus).ToString();//Used AI to generate this line of code
+        }
+        Console.WriteLine($"Congratulations! You have earned {_points} points!");
     }
 
     public override bool IsComplete()
     {
-        return false;
+        if (_amountCompleted == _target)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override string GetDetailsString()

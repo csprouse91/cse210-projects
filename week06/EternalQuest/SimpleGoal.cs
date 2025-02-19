@@ -7,15 +7,17 @@ public class SimpleGoal : Goal
     private bool _isComplete;
 
     //Constructor
-    public SimpleGoal(string name, string description, string points) : base(name, description, points)
+    public SimpleGoal(string name, string description, string points, bool isComplete = false) : base(name, description, points)
     {
-        _isComplete = false;
+        _isComplete = isComplete;
     }
 
     //Methods
 
     public override void RecordEvent()
     {
+        Console.WriteLine($"Congratulations! You have earened {_points} points!");
+        _isComplete = true;
     }
 
     public override bool IsComplete()
