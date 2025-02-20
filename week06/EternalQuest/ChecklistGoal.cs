@@ -20,14 +20,31 @@ public class ChecklistGoal : Goal
     //Methods
     public override void RecordEvent()
     {
+        int bonus = 0;
         _amountCompleted++;
         if (_amountCompleted == _target)
         {
-            _points = (int.Parse(_points) + _bonus).ToString();//Used AI to generate this line of code
+            bonus = _bonus;
+            Console.WriteLine($"Congratulations! You have earned {_points} points, and an additional {_bonus} bonus points!");
         }
-        Console.WriteLine($"Congratulations! You have earned {_points} points!");
-    }
+        else
+        {
+            Console.WriteLine($"Congratulations! You have earned {_points} points!");
+        }
 
+
+    }
+    public override string GetPoints()
+    {
+        if (_amountCompleted == _target)
+        {
+            return (_bonus + int.Parse(base.GetPoints())).ToString();//Change _points to int add together with _bonus then change back to string
+        }
+        else
+        {
+            return base.GetPoints();
+        }
+    }
     public override bool IsComplete()
     {
         if (_amountCompleted == _target)
@@ -47,6 +64,6 @@ public class ChecklistGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"ChecklistGoal:{base.GetDetailsString()} - {_bonus} - {_amountCompleted} - {_target}";
+        return $"ChecklistGoal:{base.GetDetailsString()} - {_target} - {_bonus} - {_amountCompleted}";
     }
 }

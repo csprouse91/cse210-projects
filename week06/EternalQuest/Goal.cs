@@ -30,6 +30,10 @@ public abstract class Goal
     {
         return _shortName;
     }
+    public virtual string GetPoints()
+    {
+        return _points;
+    }
 
     public abstract string GetStringRepresentation();
 

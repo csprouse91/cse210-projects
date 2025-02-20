@@ -1,3 +1,5 @@
+12095
+SimpleGoal:Complete this class - Finish the next two projects before tomorrow - 100000 - False
 EternalGoal:Be more prayerful - Give a prayer whenever prompted or asked, and pray personally each day - 100
-SimpleGoal:Homework - Complete Week 6 Project - 1000 - False
-ChecklistGoal:Save money - Pack a lunch each day instead of eat out - 999 - 5 - 5000 - 0
+SimpleGoal:Homework - Complete Week 6 Project - 1000 - True
+ChecklistGoal:Save money - Pack a lunch each day instead of eat out - 999 - 5 - 5000 - 5

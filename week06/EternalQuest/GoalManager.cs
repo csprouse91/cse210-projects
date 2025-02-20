@@ -162,9 +162,8 @@ public class GoalManager
         Console.Write("Which goal did you accomplish? ");
         int userGoalSelect = int.Parse(Console.ReadLine());
         Goal selectedGoal = _goals[userGoalSelect - 1];
-        selectedGoal.RecordEvent();//Potentially alter value of _points in ChecklistGoal
-        _score += int.Parse(selectedGoal.GetStringRepresentation().Split(" - ")[2]);//Trying to get the points from the string representation
-
+        selectedGoal.RecordEvent();
+        _score += int.Parse(selectedGoal.GetPoints());
     }
 
     public void SaveGoals()
@@ -174,15 +173,18 @@ public class GoalManager
 
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
+            outputFile.WriteLine(_score);
             foreach (Goal goal in _goals)
             {
                 outputFile.WriteLine(goal.GetStringRepresentation());
             }
         }
+        Start();
     }
 
     public void LoadGoals()
     {
+        Console.WriteLine("Enter the filename to load your goals from (include .txt): ");
         string filename = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(filename);
 
