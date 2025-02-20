@@ -32,33 +32,8 @@ public class GoalManager
             switch (userInput)
             {
                 case "1":
-                    Console.WriteLine("Creating a new goal...");
-                    Console.WriteLine("There are three types of goals: ");
-                    Console.WriteLine("1. Simple Goal");
-                    Console.WriteLine("2. Eternal Goal");
-                    Console.WriteLine("3. Checklist Goal");
-                    Console.Write("Please indicate the type of goal you want to create: ");
-                    string goalType = Console.ReadLine();
-                    Console.Write("What is the name of your goal?");
-                    string goalName = Console.ReadLine();
-                    Console.Write("Give a short description of your goal: ");
-                    string goalDescription = Console.ReadLine();
-                    Console.Write("How many points is this goal worth?");
-                    string goalPoints = Console.ReadLine();
-                    if (goalType == "3")
-                    {
-                        Console.Write("How many times must you complete this goal to earn bonus points?");
-                        int target = int.Parse(Console.ReadLine());
-                        Console.Write("How many bonus points do you want this to be?");
-                        int bonus = int.Parse(Console.ReadLine());
-                        CreateGoal(goalType, goalName, goalDescription, goalPoints, false, target, bonus);
-                        break;
-                    }
-                    else
-                    {
-                        CreateGoal(goalType, goalName, goalDescription, goalPoints);
-                        break;
-                    }
+                    CreateGoal();
+                    break;
                 case "2":
                     Console.WriteLine("Listing goals...");
                     ListGoalDetails();
@@ -119,10 +94,39 @@ public class GoalManager
             }
         }
     }
-    public void CreateGoal(string type, string name, string description, string points, bool isComplete = false, int amount = 0, int target = 0, int bonus = 0)
+    //Constructor 
+    public void CreateGoal()
     {
+        Console.WriteLine("Creating a new goal...");
+        Console.WriteLine("There are three types of goals: ");
+        Console.WriteLine("1. Simple Goal");
+        Console.WriteLine("2. Eternal Goal");
+        Console.WriteLine("3. Checklist Goal");
+        Console.Write("Please indicate the type of goal you want to create: ");
+        string goalType = Console.ReadLine();
+        Console.Write("What is the name of your goal?");
+        string goalName = Console.ReadLine();
+        Console.Write("Give a short description of your goal: ");
+        string goalDescription = Console.ReadLine();
+        Console.Write("How many points is this goal worth?");
+        string goalPoints = Console.ReadLine();
+        if (goalType == "3")
+        {
+            Console.Write("How many times must you complete this goal to earn bonus points?");
+            int target = int.Parse(Console.ReadLine());
+            Console.Write("How many bonus points do you want this to be?");
+            int bonus = int.Parse(Console.ReadLine());
+            CreateGoal(goalType, goalName, goalDescription, goalPoints, target, bonus);//Does not need argument for amount here
+        }
+        else
+        {
+            CreateGoal(goalType, goalName, goalDescription, goalPoints);//Does not need argument for isComplete here
+        }
+    }
 
-
+    //Constructor
+    public void CreateGoal(string type, string name, string description, string points, bool isComplete = false)
+    {
         if (type == "1" || type == "SimpleGoal")
         {
             Goal newGoal = new SimpleGoal(name, description, points, isComplete);
@@ -133,17 +137,25 @@ public class GoalManager
             Goal newGoal = new EternalGoal(name, description, points);
             _goals.Add(newGoal);
         }
-        else if (type == "3" || type == "ChecklistGoal")
+        else
+        {
+            Console.WriteLine("Attempted to CreateGoal that was not SimpleGoal or EternalGoal");
+        }
+    }
+    public void CreateGoal(string type, string name, string description, string points, int target, int bonus, int amount = 0)
+    {
+        if (type == "3" || type == "ChecklistGoal")
         {
 
-            Goal newGoal = new ChecklistGoal(name, description, points, amount, target, bonus);
+            Goal newGoal = new ChecklistGoal(name, description, points, target, bonus, amount);
             _goals.Add(newGoal);
         }
         else
         {
-            Console.WriteLine("Invalid goal type");
+            Console.WriteLine("Attempted to CreateGoal that was not ChecklistGoal");
         }
     }
+    //Constructor 
 
     public void RecordEvent()
     {
@@ -194,10 +206,10 @@ public class GoalManager
             }
             else if (goalType == "ChecklistGoal")
             {
-                bonus = int.Parse(goalDetails[3]);
-                amount = int.Parse(goalDetails[4]);
-                target = int.Parse(goalDetails[5]);
-                CreateGoal(goalType, name, description, points, bonus, amount, target, false);
+                target = int.Parse(goalDetails[3]);
+                bonus = int.Parse(goalDetails[4]);
+                amount = int.Parse(goalDetails[5]);
+                CreateGoal(goalType, name, description, points, target, bonus, amount);
             }
             else if (goalType == "EternalGoal")
             {
