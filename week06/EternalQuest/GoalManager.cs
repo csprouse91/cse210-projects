@@ -179,7 +179,6 @@ public class GoalManager
                 outputFile.WriteLine(goal.GetStringRepresentation());
             }
         }
-        Start();
     }
 
     public void LoadGoals()
